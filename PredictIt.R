@@ -2,7 +2,7 @@
 # Import
 library(rpredictit)
 library(tibble)
-"%>%" <- magrittr::"%>%"
+library(dplyr)
 
 library(ggplot2)
 theme_set(theme_light())
@@ -36,10 +36,28 @@ plotOdds <- function(market){
     # ----------------------------------------------
     # Plots
     ggplot(data = df2, aes(x = reorder(names, odds), y = odds, group = 1)) + 
-        geom_bar(stat = 'identity', color = 'black', fill = '#F6EBBD', width = 0.5, alpha = 0.7) + 
-        geom_text(aes(label = round(odds)), vjust = 0.3, hjust = -0.5, size = 3) + 
-        geom_hline(yintercept = seq(0, 100, 25), linetype = 'dashed') + 
-        labs(title = df$name[1], x = NULL, y = 'Odds from PredictIt.org') + 
+        geom_bar(
+            stat = 'identity',
+            color = 'black',
+            fill = '#F6EBBD',
+            width = 0.5,
+            alpha = 0.7
+        ) + 
+        geom_text(
+            aes(label = round(odds)),
+            vjust = 0.3,
+            hjust = -0.5,
+            size = 3
+        ) + 
+        geom_hline(
+            yintercept = seq(0, 100, 25),
+            linetype = 'dashed'
+        ) + 
+        labs(
+            title = df$name[1],
+            x = NULL,
+            y = 'Odds from PredictIt.org'
+        ) + 
         coord_flip()
 }
 
@@ -50,5 +68,6 @@ plotOdds(7057)
 plotOdds(7013)
 plotOdds(7053)
 plotOdds(7136)
+plotOdds(7398)
 
 h <- contractsList()
